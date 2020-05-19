@@ -12,7 +12,7 @@ test -d $USER_BG_DIR || mkdir $USER_BG_DIR
 
 if test -r $USER_BG_DIR/ws_0_background
 then
-    ln -s $USER_BG_DIR/ws_0_background $USER_BG_DIR/default
+    : # Nothing to do
 else
     {
 	echo "Introduce the images for each workspace in the directory"
@@ -22,15 +22,13 @@ else
     exit 1
 fi
 
-## This line link the default background image to our personal backgrounds directory
-eval gsettings set org.cinnamon.desktop.background picture-uri "file:///$HOME/.user_backgrounds/default"
-
 function change_bakground_image ()
 {
     # $1 the WS number
     BG_IMAGE=$USER_BG_DIR/ws_$1_background
     if test -e $BG_IMAGE
     then
+	## This line link the default background image to our personal backgrounds directory
 	eval gsettings set org.cinnamon.desktop.background picture-uri "file:///$BG_IMAGE"
     fi
 }
